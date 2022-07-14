@@ -22,6 +22,20 @@ class _MyAppState extends State<MyApp> {
   List<Meal> _availableMeals = dummyMeals;
   Settings _settings = Settings();
 
+  final List<Meal> _favorites = [];
+
+  bool _isFavorite(Meal meal) {
+    return _favorites.contains(meal);
+  }
+
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favorites.contains(meal)
+          ? _favorites.remove(meal)
+          : _favorites.add(meal);
+    });
+  }
+
   void _filterMeals(Settings settings) {
     setState(() {
       _settings = settings;
@@ -66,10 +80,13 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        AppRoutes.home: (ctx) => const TabsScreen(),
+        AppRoutes.home: (ctx) => TabsScreen(favorites: _favorites),
         AppRoutes.categoriesMeals: (ctx) =>
             CategoriesMaelsScreen(meals: _availableMeals),
-        AppRoutes.mealDetails: (ctx) => const MealDetailScreen(),
+        AppRoutes.mealDetails: (ctx) => MealDetailScreen(
+              onToggleFavorite: _toggleFavorite,
+              isFavorite: _isFavorite,
+            ),
         AppRoutes.settings: (ctx) => SettingsScreen(
               settings: _settings,
               onSettingsChanged: _filterMeals,
