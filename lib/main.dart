@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:meals/data/dummy_data.dart';
+import 'package:meals/models/meal.dart';
 import 'package:meals/screens/categories_meals_screen.dart';
 import 'package:meals/screens/categories_screen.dart';
 import 'package:meals/screens/meal_detail_screen.dart';
+import 'package:meals/screens/settings.dart';
 import 'package:meals/screens/tabs_screen.dart';
 import 'package:meals/utils/app_routes.dart';
 
@@ -9,6 +12,8 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  final List<Meal> _avaliableMeals = dummyMeals;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +44,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         AppRoutes.home: (ctx) => const TabsScreen(),
-        AppRoutes.categoriesMeals: (ctx) => const CategoriesMaelsScreen(),
+        AppRoutes.categoriesMeals: (ctx) =>
+            CategoriesMaelsScreen(meals: _avaliableMeals),
         AppRoutes.mealDetails: (ctx) => const MealDetailScreen(),
+        AppRoutes.settings: (ctx) => const SettingsScreen(),
       },
       onGenerateRoute: (settings) {
         return null;
