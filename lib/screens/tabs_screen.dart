@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/screens/categories_screen.dart';
 import 'package:meals/screens/favorite_screen.dart';
-import 'package:meals/screens/main_drawer.dart';
+import 'package:meals/components/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
